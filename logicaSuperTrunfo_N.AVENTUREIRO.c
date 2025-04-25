@@ -61,7 +61,8 @@ int main() {
     densidade2 = populacao2 / area2;
     pibpercapita2 = pib2 / populacao2;
 
-    // Menu de escolha de atributo
+    
+    // Menu de escolha de atributo  
     int opcao;
     printf("\nEscolha o atributo para comparar:\n");
     printf("1 - Populacao\n");
