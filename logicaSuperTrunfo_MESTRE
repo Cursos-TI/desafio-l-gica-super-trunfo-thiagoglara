@@ -1,0 +1,125 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int main() {
+    // Dados da Carta 1
+    char cidade1[30] = "CidadeA";
+    unsigned long int populacao1 = 1000000;
+    float area1 = 500.0, pib1 = 20000.0;
+    int pontoturistico1 = 10;
+    float densidade1 = populacao1 / area1;
+
+    // Dados da Carta 2
+    char cidade2[30] = "CidadeB";
+    unsigned long int populacao2 = 800000;
+    float area2 = 300.0, pib2 = 18000.0;
+    int pontoturistico2 = 15;
+    float densidade2 = populacao2 / area2;
+
+    int opcao1, opcao2;
+    float valor1_attr1, valor2_attr1, valor1_attr2, valor2_attr2;
+    float soma1, soma2;
+
+    printf("Atributos disponíveis:\n");
+    printf("1 - Populacao\n2 - Area\n3 - PIB\n4 - Pontos Turisticos\n5 - Densidade Demografica\n");
+
+    // Escolha do primeiro atributo
+    printf("\nEscolha o primeiro atributo para comparacao (1 a 5): ");
+    scanf("%d", &opcao1);
+
+    // Menu dinâmico - removendo o primeiro atributo da escolha
+    printf("\nEscolha o segundo atributo para comparacao (diferente do primeiro):\n");
+    for (int i = 1; i <= 5; i++) {
+        if (i != opcao1) {
+            switch (i) {
+                case 1: printf("1 - Populacao\n"); break;
+                case 2: printf("2 - Area\n"); break;
+                case 3: printf("3 - PIB\n"); break;
+                case 4: printf("4 - Pontos Turisticos\n"); break;
+                case 5: printf("5 - Densidade Demografica\n"); break;
+            }
+        }
+    }
+
+    printf("Escolha: ");
+    scanf("%d", &opcao2);
+
+    // Comparacao do primeiro atributo
+    switch (opcao1) {
+        case 1:
+            valor1_attr1 = populacao1;
+            valor2_attr1 = populacao2;
+            break;
+        case 2:
+            valor1_attr1 = area1;
+            valor2_attr1 = area2;
+            break;
+        case 3:
+            valor1_attr1 = pib1;
+            valor2_attr1 = pib2;
+            break;
+        case 4:
+            valor1_attr1 = pontoturistico1;
+            valor2_attr1 = pontoturistico2;
+            break;
+        case 5:
+            valor1_attr1 = densidade1;
+            valor2_attr1 = densidade2;
+            break;
+        default:
+            printf("Atributo invalido!\n");
+            return 1;
+    }
+
+    // Comparacao do segundo atributo
+    switch (opcao2) {
+        case 1:
+            valor1_attr2 = populacao1;
+            valor2_attr2 = populacao2;
+            break;
+        case 2:
+            valor1_attr2 = area1;
+            valor2_attr2 = area2;
+            break;
+        case 3:
+            valor1_attr2 = pib1;
+            valor2_attr2 = pib2;
+            break;
+        case 4:
+            valor1_attr2 = pontoturistico1;
+            valor2_attr2 = pontoturistico2;
+            break;
+        case 5:
+            valor1_attr2 = densidade1;
+            valor2_attr2 = densidade2;
+            break;
+        default:
+            printf("Atributo invalido!\n");
+            return 1;
+    }
+
+    // comparacao para densidade (menor vence)
+    valor1_attr1 = (opcao1 == 5) ? -valor1_attr1 : valor1_attr1;
+    valor2_attr1 = (opcao1 == 5) ? -valor2_attr1 : valor2_attr1;
+    valor1_attr2 = (opcao2 == 5) ? -valor1_attr2 : valor1_attr2;
+    valor2_attr2 = (opcao2 == 5) ? -valor2_attr2 : valor2_attr2;
+
+    soma1 = valor1_attr1 + valor1_attr2;
+    soma2 = valor2_attr1 + valor2_attr2;
+
+    printf("\nComparando as cidades %s e %s\n", cidade1, cidade2);
+    printf("Valores escolhidos:\n");
+    printf("Atributo 1: %.2f vs %.2f\n", (opcao1 == 5) ? -valor1_attr1 : valor1_attr1, (opcao1 == 5) ? -valor2_attr1 : valor2_attr1);
+    printf("Atributo 2: %.2f vs %.2f\n", (opcao2 == 5) ? -valor1_attr2 : valor1_attr2, (opcao2 == 5) ? -valor2_attr2 : valor2_attr2);
+    printf("Soma dos atributos: %.2f (Cidade 1) vs %.2f (Cidade 2)\n", soma1, soma2);
+
+    if (soma1 > soma2) {
+        printf("Resultado: %s venceu!\n", cidade1);
+    } else if (soma2 > soma1) {
+        printf("Resultado: %s venceu!\n", cidade2);
+    } else {
+        printf("Resultado: Empate!\n");
+    }
+
+    return 0;
+}
